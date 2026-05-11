@@ -58,11 +58,17 @@ export function getModel(name: string, provider: Provider = defaultProvider) {
     name = "gemini-2.5-pro";
   }
   const modelName = config.MODEL_NAME || name;
+  let targetProvider = provider;
+
+  if (modelName.includes("gemini")) {
+    targetProvider = "google";
+  }
+
   // o3-mini returns empty text via the Responses API — force Chat Completions
-  if (provider === "openai" && modelName.startsWith("o3-mini")) {
+  if (targetProvider === "openai" && modelName.startsWith("o3-mini")) {
     return providerList.openai.chat(modelName);
   }
-  return providerList[provider](modelName);
+  return providerList[targetProvider](modelName);
 }
 
 export function getEmbeddingModel(

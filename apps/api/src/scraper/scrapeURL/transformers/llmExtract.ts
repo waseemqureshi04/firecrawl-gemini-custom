@@ -341,16 +341,18 @@ export async function generateCompletions({
             anthropic: {
               thinking: { type: "enabled", budgetTokens: 12000 },
             },
-            google: {
-              labels: {
-                teamId: metadata.teamId,
-                functionId: metadata.functionId ?? "unspecified",
-                extractId: metadata.extractId ?? "unspecified",
-                scrapeId: metadata.scrapeId ?? "unspecified",
-                deepResearchId: metadata.deepResearchId ?? "unspecified",
-                llmsTxtId: metadata.llmsTxtId ?? "unspecified",
+            ...(process.env.VERTEX_CREDENTIALS ? {
+              google: {
+                labels: {
+                  teamId: metadata.teamId,
+                  functionId: metadata.functionId ?? "unspecified",
+                  extractId: metadata.extractId ?? "unspecified",
+                  scrapeId: metadata.scrapeId ?? "unspecified",
+                  deepResearchId: metadata.deepResearchId ?? "unspecified",
+                  llmsTxtId: metadata.llmsTxtId ?? "unspecified",
+                },
               },
-            },
+            } : {}),
             openai: {
               strictJsonSchema: true,
             },
@@ -447,16 +449,18 @@ export async function generateCompletions({
                 anthropic: {
                   thinking: { type: "enabled", budgetTokens: 12000 },
                 },
-                google: {
-                  labels: {
-                    teamId: metadata.teamId,
-                    functionId: metadata.functionId ?? "unspecified",
-                    extractId: metadata.extractId ?? "unspecified",
-                    scrapeId: metadata.scrapeId ?? "unspecified",
-                    deepResearchId: metadata.deepResearchId ?? "unspecified",
-                    llmsTxtId: metadata.llmsTxtId ?? "unspecified",
+                ...(process.env.VERTEX_CREDENTIALS ? {
+                  google: {
+                    labels: {
+                      teamId: metadata.teamId,
+                      functionId: metadata.functionId ?? "unspecified",
+                      extractId: metadata.extractId ?? "unspecified",
+                      scrapeId: metadata.scrapeId ?? "unspecified",
+                      deepResearchId: metadata.deepResearchId ?? "unspecified",
+                      llmsTxtId: metadata.llmsTxtId ?? "unspecified",
+                    },
                   },
-                },
+                } : {}),
                 openai: {
                   strictJsonSchema: true,
                 },
@@ -618,16 +622,18 @@ export async function generateCompletions({
               anthropic: {
                 thinking: { type: "enabled", budgetTokens: 12000 },
               },
-              google: {
-                labels: {
-                  teamId: metadata.teamId,
-                  functionId: metadata.functionId ?? "unspecified",
-                  extractId: metadata.extractId ?? "unspecified",
-                  scrapeId: metadata.scrapeId ?? "unspecified",
-                  deepResearchId: metadata.deepResearchId ?? "unspecified",
-                  llmsTxtId: metadata.llmsTxtId ?? "unspecified",
+              ...(process.env.VERTEX_CREDENTIALS ? {
+                google: {
+                  labels: {
+                    teamId: metadata.teamId,
+                    functionId: metadata.functionId ?? "unspecified",
+                    extractId: metadata.extractId ?? "unspecified",
+                    scrapeId: metadata.scrapeId ?? "unspecified",
+                    deepResearchId: metadata.deepResearchId ?? "unspecified",
+                    llmsTxtId: metadata.llmsTxtId ?? "unspecified",
+                  },
                 },
-              },
+              } : {}),
               openai: {
                 strictJsonSchema: true,
               },
@@ -700,18 +706,20 @@ export async function generateCompletions({
       prompt: prompt,
       providerOptions: {
         ...(providerOptions || {}),
-        google: {
-          ...((providerOptions as any)?.vertex || {}),
-          labels: {
-            ...((providerOptions as any)?.vertex?.labels || {}),
-            teamId: metadata.teamId,
-            functionId: metadata.functionId ?? "unspecified",
-            extractId: metadata.extractId ?? "unspecified",
-            scrapeId: metadata.scrapeId ?? "unspecified",
-            deepResearchId: metadata.deepResearchId ?? "unspecified",
-            llmsTxtId: metadata.llmsTxtId ?? "unspecified",
+        ...(process.env.VERTEX_CREDENTIALS ? {
+          google: {
+            ...((providerOptions as any)?.vertex || {}),
+            labels: {
+              ...((providerOptions as any)?.vertex?.labels || {}),
+              teamId: metadata.teamId,
+              functionId: metadata.functionId ?? "unspecified",
+              extractId: metadata.extractId ?? "unspecified",
+              scrapeId: metadata.scrapeId ?? "unspecified",
+              deepResearchId: metadata.deepResearchId ?? "unspecified",
+              llmsTxtId: metadata.llmsTxtId ?? "unspecified",
+            },
           },
-        },
+        } : {}),
         openai: {
           strictJsonSchema: true,
         },
