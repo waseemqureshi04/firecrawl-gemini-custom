@@ -1,0 +1,31 @@
+use_default_settings: true
+
+server:
+  port: 8080
+  bind_address: "0.0.0.0"
+  secret_key: "searxng_secret_key_syncques_local_firecrawl"
+
+search:
+  safe_search: 0
+  autocomplete: ""
+  formats:
+    - html
+    - json
+
+engines:
+  - name: bing
+    engine: bing
+    shortcut: bi
+    timeout: 3.0
+  - name: qwant
+    engine: qwant
+    shortcut: qw
+    timeout: 3.0
+  - name: yahoo
+    engine: yahoo
+    shortcut: yh
+    timeout: 3.0
+  - name: wikipedia
+    engine: wikipedia
+    shortcut: wp
+    timeout: 2.0

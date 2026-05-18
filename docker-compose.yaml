@@ -168,6 +168,23 @@ services:
         max-file: "3"
         compress: "true"
 
+  searxng:
+    image: searxng/searxng:latest
+    container_name: firecrawl-searxng
+    volumes:
+      - ./searxng:/etc/searxng:ro
+    ports:
+      - "8080:8080"
+    networks:
+      - backend
+    restart: always
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "5m"
+        max-file: "2"
+        compress: "true"
+
 networks:
   backend:
     driver: bridge
