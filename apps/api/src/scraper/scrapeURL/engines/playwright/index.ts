@@ -16,6 +16,7 @@ export async function scrapeURLWithPlaywright(
     body: {
       url: meta.rewrittenUrl ?? meta.url,
       wait_after_load: meta.options.waitFor,
+      wait_until: "networkidle",
       timeout: meta.abort.scrapeTimeout(),
       headers: meta.options.headers,
       skip_tls_verification: meta.options.skipTlsVerification,

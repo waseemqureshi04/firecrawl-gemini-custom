@@ -45,6 +45,7 @@ x-common-env: &common-env
   AUTUMN_SECRET_KEY: ${AUTUMN_SECRET_KEY}
   SLACK_WEBHOOK_URL: ${SLACK_WEBHOOK_URL}
   BULL_AUTH_KEY: ${BULL_AUTH_KEY}
+  API_KEY: ${API_KEY}
   TEST_API_KEY: ${TEST_API_KEY}
   SUPABASE_ANON_TOKEN: ${SUPABASE_ANON_TOKEN}
   SUPABASE_URL: ${SUPABASE_URL}
@@ -79,6 +80,8 @@ services:
     cpus: 2.0
     mem_limit: 4G
     memswap_limit: 4G
+    ports:
+      - "${PLAYWRIGHT_PORT:-3003}:3000"
     logging:
       driver: "json-file"
       options:
